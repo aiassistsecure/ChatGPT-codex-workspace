@@ -1,0 +1,16 @@
+[package]
+name = "disk-explainer-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+publish.workspace = true
+description = "CLI scaffold for the NEDB-backed disk explainer"
+
+[[bin]]
+name = "diskwhy"
+path = "src/main.rs"
+
+[dependencies]
+disk-explainer-core = { path = "../core" }
+serde_json.workspace = true
