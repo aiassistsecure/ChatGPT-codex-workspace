@@ -34,4 +34,4 @@ cargo clippy --workspace --all-targets -- -D warnings
 cargo test --workspace
 ```
 
-Initial package resolution produces Cargo.lock; commit it before the first implementation/release milestone. Publication is disabled in both crate manifests.
+Cargo.lock is committed after real dependency resolution. CI uses --locked. Publication is disabled in both crate manifests.
