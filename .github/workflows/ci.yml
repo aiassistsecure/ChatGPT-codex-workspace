@@ -1,0 +1,51 @@
+name: Workspace CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  catalog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 scripts/check_workspace.py
+
+  disk-explainer:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: prototypes/disk-explainer
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust stable
+        run: rustup toolchain install stable --profile minimal --component rustfmt --component clippy
+      - name: Format
+        run: cargo +stable fmt --all --check
+      - name: Lint
+        run: cargo +stable clippy --workspace --all-targets -- -D warnings
+      - name: Test
+        run: cargo +stable test --workspace
+      - name: Capability smoke test
+        run: cargo +stable run -p disk-explainer-cli -- about --json
+      - name: Preserve initial lockfile for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: disk-explainer-lock-${{ matrix.os }}
+          path: prototypes/disk-explainer/Cargo.lock

@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "projects": [
+    {
+      "id": "disk-explainer",
+      "path": "prototypes/disk-explainer",
+      "stage": "scaffold",
+      "runtime": "rust",
+      "storage": "nedb-engine",
+      "distribution_targets": ["crates.io", "pypi", "npm"],
+      "release_enabled": false
+    }
+  ]
+}

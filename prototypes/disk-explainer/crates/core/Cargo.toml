@@ -1,0 +1,17 @@
+[package]
+name = "disk-explainer-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+publish.workspace = true
+description = "Local disk explanation and NEDB history foundation"
+
+[dependencies]
+serde.workspace = true
+nedb-engine.workspace = true
+
+[dev-dependencies]
+anyhow.workspace = true
+serde_json.workspace = true
+tempfile.workspace = true
