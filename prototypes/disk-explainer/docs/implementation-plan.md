@@ -3,7 +3,7 @@
 | Gate | Deliverable | Proof |
 | --- | --- | --- |
 | Scaffold (this change) | Workspace, capability CLI, NEDB smoke tests, spec, CI | Catalog check; compile/tests in CI |
-| M0 | Verified NEDB storage adapter and committed Cargo.lock | Write/kill/reopen boundaries, readiness, error propagation, bounded queries and retention behavior |
+| M0 | Verified NEDB storage adapter and durability contract | Write/kill/reopen boundaries, readiness, error propagation, bounded queries and retention behavior |
 | M1 | Read-only scan with Rust/Node ownership evidence | Disposable fixtures and real directory output with correct unknowns |
 | M2 | NEDB history and explanations | Growth/rename comparison across process restarts |
 | M3 | Reviewed cleanup plans and receipts | Stale-plan, symlink-race and interrupted-cleanup tests |

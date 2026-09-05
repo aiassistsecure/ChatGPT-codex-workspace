@@ -39,13 +39,8 @@ jobs:
       - name: Format
         run: cargo +stable fmt --all --check
       - name: Lint
-        run: cargo +stable clippy --workspace --all-targets -- -D warnings
+        run: cargo +stable clippy --locked --workspace --all-targets -- -D warnings
       - name: Test
-        run: cargo +stable test --workspace
+        run: cargo +stable test --locked --workspace
       - name: Capability smoke test
-        run: cargo +stable run -p disk-explainer-cli -- about --json
-      - name: Preserve initial lockfile for review
-        uses: actions/upload-artifact@v4
-        with:
-          name: disk-explainer-lock-${{ matrix.os }}
-          path: prototypes/disk-explainer/Cargo.lock
+        run: cargo +stable run --locked -p disk-explainer-cli -- about --json
